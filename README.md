@@ -81,7 +81,7 @@ sqlalchemy.url = sqlalchemy.url = postgresql://postgres:123456789@localhost:5432
 # Database connection
 
 1. create fasterp/database directory
-2. create the fasterp/database/connection.py file
+2. create the fasterp/database/dbconnection.py file
 
 ```
 from sqlalchemy import create_engine
@@ -99,3 +99,43 @@ Base = declarative_base()
 
 ```
 
+# database models __init__.py file
+1. create the database/model directory
+2. create the database/model/__init__.py file
+3. import the created model in database/model/__init__.py file
+
+```
+from .country import Country
+
+```
+
+
+# env.py of alembic
+Open the alembic/env.py and add below line of code
+
+
+```
+*******************
+
+from database.dbconnection import Base # by atul
+
+from database.model import * # by atul
+target_metadata = Base.metadata
+
+***********************
+```
+
+# Auto Migration
+
+If you want alembic handles migrations follow this method: In the alembic folder edit env.py and find target_metadata line and edit like the following
+
+import the "from main import Base" in alembic/env.py file and set the "target_metadata = Base.metadata" in alembic/env.py file
+
+Reference url https://fastapi.blog/blog/posts/2023-07-20-fastapi-sqlalchemy-migrations-guide
+
+# Generating a Migration
+
+```
+(env) atul@atul-Lenovo-G570:~/fasterp$ alembic revision --autogenerate -m "Initial Migration"
+
+```
