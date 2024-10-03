@@ -139,3 +139,55 @@ Reference url https://fastapi.blog/blog/posts/2023-07-20-fastapi-sqlalchemy-migr
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic revision --autogenerate -m "Initial Migration"
 
 ```
+
+# create contries table in database
+1. create table by help of https://docs.sqlalchemy.org/en/20/core/metadata.html
+
+```
+from database.dbconnection import Base
+from sqlalchemy import Column, Integer, String, DateTime
+from datetime import datetime
+
+class Country(Base):
+    __tablename__ = 'countries'
+    
+    id = Column('id',Integer, primary_key=True, index=True)
+    country_name = Column('country_name',String(255),nullable=False)
+    status = Column('status',Integer,default=1,nullable=True)
+    created_at = Column('created_at',DateTime, default=datetime.utcnow, nullable=True)
+    updated_at = Column('updated_at',DateTime, default=datetime.utcnow, onupdate=datetime.utcnow,nullable=True)
+    
+```
+
+
+
+# rollback last migration of alembic
+reference of help: https://python-code.dev/articles/270017224 
+1. downgrade the last migration command: alembic downgrade -1
+
+```
+(env) atul@atul-Lenovo-G570:~/fasterp$ alembic downgrade -1
+
+``` 
+
+# rollback specific migration of alembic
+reference of help: https://python-code.dev/articles/270017224 
+
+1. (method-1): get the latest revision ID. command: alembic current
+```
+(env) atul@atul-Lenovo-G570:~/fasterp$ alembic current
+
+```
+
+2.(method-2): You can also get the revision ID from alembic migration file. Go to alembic/versions directory and open the any one migration file. For example 1eaa2206f60f_add_nullable_in_states_table.py here 1eaa2206f60f is the revision ID.
+
+2.(method-3) You can also get the revision ID from alembic migration file. Go to alembic/versions directory and open the any one migration file. For example opent the 1eaa2206f60f_add_nullable_in_states_table.py in this file revision: str = '1eaa2206f60f' you will get.
+Note: down_revision: Union[str, None] = '4b268ddeef0d' is the just previous migration file revision ID. If you see down_revision: Union[str, None] = None . Here you will see None instead of previous file revision ID. It means this is the first migration file.
+
+
+3. downgrade the specific migration command: alembic downgrade <revision_id>
+
+```
+(env) atul@atul-Lenovo-G570:~/fasterp$ alembic downgrade 1eaa2206f60f
+
+```
