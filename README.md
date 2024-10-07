@@ -191,3 +191,47 @@ Note: down_revision: Union[str, None] = '4b268ddeef0d' is the just previous migr
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic downgrade 1eaa2206f60f
 
 ```
+
+# relationship and back_populates
+
+1. country.py file module
+```
+from database.dbconnection import Base
+from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy.orm import relationship
+from datetime import datetime
+
+class Country(Base):
+    __tablename__ = 'countries'
+    
+    id = Column('id',Integer, primary_key=True, index=True)
+    country_name = Column('country_name',String(255),nullable=False)
+    status = Column('status',Integer,default=1,nullable=True)
+    created_at = Column('created_at',DateTime, default=datetime.utcnow, nullable=True)
+    updated_at = Column('updated_at',DateTime, default=datetime.utcnow, onupdate=datetime.utcnow,nullable=True)
+    country = relationship('Country', back_populates='state')
+
+```
+
+2. state.py file module
+
+```
+from database.dbconnection import Base
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy.orm import relationship 
+from datetime import datetime
+
+class State(Base):
+    __tablename__ = 'states'
+    
+    id = Column('id',Integer, primary_key=True, index=True)
+    state_name = Column('state_name',String(255),nullable=False)
+    countries_id = Column('countries_id',Integer,ForeignKey('countries.id'),nullable=True)
+    status = Column('status',Integer,default=1,nullable=True)
+    created_at = Column('created_at',DateTime, default=datetime.utcnow, nullable=True)
+    updated_at = Column('updated_at',DateTime, default=datetime.utcnow, onupdate=datetime.utcnow,nullable=True)
+    state = relationship('Country', back_populates='country')
+```
+
+3. country = relationship('Country', back_populates='state') of country.py file country variable used in back_populates='country' in state.py file.
+4. state = relationship('Country', back_populates='country') of state.py file state variable used in back_populates='state' in country.py file.

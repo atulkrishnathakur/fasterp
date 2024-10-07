@@ -1,8 +1,8 @@
-"""add nullable in countries table
+"""create countries table
 
-Revision ID: 4b268ddeef0d
+Revision ID: d3d4db8de1c6
 Revises: 
-Create Date: 2024-10-03 09:24:15.690810
+Create Date: 2024-10-07 11:06:52.030714
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '4b268ddeef0d'
+revision: str = 'd3d4db8de1c6'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
