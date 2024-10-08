@@ -160,8 +160,7 @@ class Country(Base):
 ```
 
 
-
-# rollback last migration of alembic
+# rollback(downgrade) last migration of alembic
 reference of help: https://python-code.dev/articles/270017224 
 1. downgrade the last migration command: alembic downgrade -1
 
@@ -170,7 +169,7 @@ reference of help: https://python-code.dev/articles/270017224
 
 ``` 
 
-# rollback specific migration of alembic
+# rollback(downgrade) specific migration of alembic
 reference of help: https://python-code.dev/articles/270017224 
 
 1. (method-1): get the latest revision ID. command: alembic current
@@ -185,10 +184,22 @@ reference of help: https://python-code.dev/articles/270017224
 Note: down_revision: Union[str, None] = '4b268ddeef0d' is the just previous migration file revision ID. If you see down_revision: Union[str, None] = None . Here you will see None instead of previous file revision ID. It means this is the first migration file.
 
 
-3. downgrade the specific migration command: alembic downgrade <revision_id>
+3. rollback(downgrade) the specific migration command: alembic downgrade <revision_id>
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic downgrade 1eaa2206f60f
+
+```
+# rollback(downgrade) the all migrated files
+Reference: https://alembic.sqlalchemy.org/en/latest/tutorial.html#downgrading
+
+```
+(env) atul@atul-Lenovo-G570:~/fasterp$ alembic downgrade base
+
+```
+# upgrade the all migrations
+```
+(env) atul@atul-Lenovo-G570:~/fasterp$ alembic upgrade head
 
 ```
 
@@ -235,3 +246,40 @@ class State(Base):
 
 3. country = relationship('Country', back_populates='state') of country.py file country variable used in back_populates='country' in state.py file.
 4. state = relationship('Country', back_populates='country') of state.py file state variable used in back_populates='state' in country.py file.
+
+
+# How see sql query before migration
+reference: https://alembic.sqlalchemy.org/en/latest/offline.html
+
+1. method-1: run the command to show sql in console. command: alembic upgrade head --sql
+
+```
+(env) atul@atul-Lenovo-G570:~/fasterp$ alembic upgrade head --sql
+
+```
+
+2. method-2: run the command to write sql queries in a file before migration. command: alembic upgrade head --sql > state.sql
+
+```
+(env) atul@atul-Lenovo-G570:~/fasterp$ alembic upgrade head --sql > state.sql
+
+```
+
+# How to see hostory of all migrated migrations
+
+Reference: https://alembic.sqlalchemy.org/en/latest/tutorial.html
+
+1. run the command to see history of all migrated files
+```
+(env) atul@atul-Lenovo-G570:~/fasterp$ alembic history --verbose
+
+```
+
+
+# How to use already created database in sqlalchemy
+1. install the sqlacodegen. reference: https://pypi.org/project/sqlacodegen/
+
+```
+(env) atul@atul-Lenovo-G570:~/fasterp$ pip install sqlacodegen
+
+```
