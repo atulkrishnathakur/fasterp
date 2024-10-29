@@ -1,14 +1,14 @@
-# clone project
+## clone project
 ```
 atul@atul-Lenovo-G570:~$ git clone https://github.com/atulkrishnathakur/fasterp.git
 
 ```
 
-# generate requirements.txt
+## generate requirements.txt
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip3 freeze > requirements.txt
 ```
-# pip version
+## pip version
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip3 --version
@@ -22,14 +22,14 @@ atul@atul-Lenovo-G570:~$ git clone https://github.com/atulkrishnathakur/fasterp.
 
 ```
 
-# install fastapi
+## install fastapi
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip install "fastapi[standard]"
 
 ```
 
-# run the server
+## run the server
 The command uvicorn main:app refers to:
 
 1. main: the file main.py (the Python "module").
@@ -42,20 +42,20 @@ The command uvicorn main:app refers to:
 ```
 
 
-# install sqlalchemy
+## install sqlalchemy
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip3 install sqlalchemy
 
 ```
 
-# install psycopg2-binary
+## install psycopg2-binary
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip3 install psycopg2-binary
 
 ```
 
-# install alembic
+## install alembic
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip3 install alembic
@@ -69,7 +69,7 @@ Below command will create an alembic directory with necessary configuration file
 
 ```
 
-# alembic.ini file
+## alembic.ini file
 
 You can see alembic.ini file outside of alembic directory. The alembic.ini file path is fasterp/alembic.ini. 
 
@@ -78,7 +78,7 @@ sqlalchemy.url = sqlalchemy.url = postgresql://postgres:123456789@localhost:5432
 
 ```
 
-# Database connection
+## Database connection
 
 1. create fasterp/database directory
 2. create the fasterp/database/dbconnection.py file
@@ -99,7 +99,7 @@ Base = declarative_base()
 
 ```
 
-# database models __init__.py file
+## database models __init__.py file
 1. create the database/model directory
 2. create the database/model/__init__.py file
 3. import the created model in database/model/__init__.py file
@@ -110,7 +110,7 @@ from .country import Country
 ```
 
 
-# env.py of alembic
+## env.py of alembic
 Open the alembic/env.py and add below line of code
 
 
@@ -125,7 +125,7 @@ target_metadata = Base.metadata
 ***********************
 ```
 
-# Auto Migration
+## Auto Migration
 
 If you want alembic handles migrations follow this method: In the alembic folder edit env.py and find target_metadata line and edit like the following
 
@@ -133,14 +133,14 @@ import the "from main import Base" in alembic/env.py file and set the "target_me
 
 Reference url https://fastapi.blog/blog/posts/2023-07-20-fastapi-sqlalchemy-migrations-guide
 
-# Generating a Migration
+## Generating a Migration
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic revision --autogenerate -m "Initial Migration"
 
 ```
 
-# create contries table in database
+## create contries table in database
 1. create table by help of https://docs.sqlalchemy.org/en/20/core/metadata.html
 
 ```
@@ -160,7 +160,7 @@ class Country(Base):
 ```
 
 
-# rollback(downgrade) last migration of alembic
+## rollback(downgrade) last migration of alembic
 reference of help: https://python-code.dev/articles/270017224 
 1. downgrade the last migration command: alembic downgrade -1
 
@@ -169,7 +169,7 @@ reference of help: https://python-code.dev/articles/270017224
 
 ``` 
 
-# rollback(downgrade) specific migration of alembic
+## rollback(downgrade) specific migration of alembic
 reference of help: https://python-code.dev/articles/270017224 
 
 1. (method-1): get the latest revision ID. command: alembic current
@@ -190,20 +190,20 @@ Note: down_revision: Union[str, None] = '4b268ddeef0d' is the just previous migr
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic downgrade 1eaa2206f60f
 
 ```
-# rollback(downgrade) the all migrated files
+## rollback(downgrade) the all migrated files
 Reference: https://alembic.sqlalchemy.org/en/latest/tutorial.html#downgrading
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic downgrade base
 
 ```
-# upgrade the all migrations
+## upgrade the all migrations
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic upgrade head
 
 ```
 
-# relationship and back_populates
+## relationship and back_populates
 
 1. country.py file module
 ```
@@ -248,7 +248,7 @@ class State(Base):
 4. state = relationship('Country', back_populates='country') of state.py file state variable used in back_populates='state' in country.py file.
 
 
-# How see sql query before migration
+## How see sql query before migration
 reference: https://alembic.sqlalchemy.org/en/latest/offline.html
 
 1. method-1: run the command to show sql in console. command: alembic upgrade head --sql
@@ -265,7 +265,7 @@ reference: https://alembic.sqlalchemy.org/en/latest/offline.html
 
 ```
 
-# How to see hostory of all migrated migrations
+## How to see hostory of all migrated migrations
 
 Reference: https://alembic.sqlalchemy.org/en/latest/tutorial.html
 
@@ -276,7 +276,7 @@ Reference: https://alembic.sqlalchemy.org/en/latest/tutorial.html
 ```
 
 
-# How to use already created database in sqlalchemy
+## How to use already created database in sqlalchemy
 1. install the sqlacodegen-v2. reference: https://pypi.org/project/sqlacodegen-v2/
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip3 install sqlacodegen_v2[citext]
@@ -430,14 +430,14 @@ def downgrade() -> None:
 ```
 9. create the model file for account table 
 
-# SQL Datatype Objects for sqlalchemy
+## SQL Datatype Objects for sqlalchemy
 Reference: https://docs.sqlalchemy.org/en/20/core/types.html
 
-# Cascades for sqlalchemy
+## Cascades for sqlalchemy
 Reference: https://docs.sqlalchemy.org/en/20/orm/cascades.html
 
 
-# timezone setting
+## timezone setting
 
 1. install the pytz for timezone
 ```
@@ -445,30 +445,249 @@ Reference: https://docs.sqlalchemy.org/en/20/orm/cascades.html
 
 ```
 
-# Table Configuration with Declarative for mapped_column
+## Table Configuration with Declarative for mapped_column
 Reference: https://docs.sqlalchemy.org/en/20/orm/declarative_tables.html
 
-# An Simple example of User model
+## How to configure alembic for multiple schema of postgresql
+1. create alembic directory in your project
+2. create hr and sales directory in alembic directory
+3. Initialize Alembic within each schema-specific directory:
 ```
-from sqlalchemy import (BigInteger,Column,PrimaryKeyConstraint,Text,String,Integer,DateTime,
-BigInteger,SmallInteger,func,UniqueConstraint)
-from sqlalchemy.orm import Mapped, declarative_base, mapped_column
-from sqlalchemy.orm.base import Mapped
-from database.dbconnection import Base
+alembic -c alembic/hr/alembic.ini init alembic/hr
+alembic -c alembic/sales/alembic.ini init alembic/sales
 
-class User(Base):
-    __tablename__ = 'users'
-    __table_args__ = (
-        PrimaryKeyConstraint('id', name='user_pkey'),
-        UniqueConstraint('email', name='uix_email')
+```
+
+4. Configure alembic/hr/alembic.ini and alembic/sales/alembic.ini. Set the same database for both. If database name is different then you write diffent database name.
+
+```
+script_location = alembic/hr
+sqlalchemy.url = postgresql://postgres:123456789@localhost:5432/fasterp_db
+
+```
+
+```
+script_location = alembic/sales
+sqlalchemy.url = postgresql://postgres:123456789@localhost:5432/fasterp_db
+
+```
+
+5. create include_object() function in alembic/hr/env.py and sales/env.py file
+6. set version_table_schema= 'hr'
+7. create the model/hr/__init__.py and model/sales/__init__.py 
+8. change in alembic/hr/.env file
+```
+from logging.config import fileConfig
+
+from sqlalchemy import engine_from_config
+from sqlalchemy import pool
+
+from alembic import context
+from database.dbconnection import Base # by atul
+from database.dbconfig import SCHEMA_HR
+
+# this is the Alembic Config object, which provides
+# access to the values within the .ini file in use.
+config = context.config
+
+# Interpret the config file for Python logging.
+# This line sets up loggers basically.
+if config.config_file_name is not None:
+    fileConfig(config.config_file_name)
+
+# add your model's MetaData object here
+# for 'autogenerate' support
+# from myapp import mymodel
+# target_metadata = mymodel.Base.metadata
+from database.model.hr import * # by atul
+target_metadata = Base.metadata
+
+# other values from the config, defined by the needs of env.py,
+# can be acquired:
+# my_important_option = config.get_main_option("my_important_option")
+# ... etc.
+
+
+def run_migrations_offline() -> None:
+    """Run migrations in 'offline' mode.
+
+    This configures the context with just a URL
+    and not an Engine, though an Engine is acceptable
+    here as well.  By skipping the Engine creation
+    we don't even need a DBAPI to be available.
+
+    Calls to context.execute() here emit the given string to the
+    script output.
+
+    """
+    schema_name = SCHEMA_HR
+    url = config.get_main_option("sqlalchemy.url")
+    context.configure(
+        url=url,
+        target_metadata=target_metadata,
+        literal_binds=True,
+        dialect_opts={"paramstyle": "named"},
+        version_table_schema=schema_name
     )
 
-    id: Mapped[BigInteger] = mapped_column('id',BigInteger,primary_key=True,autoincrement=True,nullable=False)
-    firstname: Mapped[String] = mapped_column('first_name',String(255),nullable=False)
-    secondname:Mapped[String] = mapped_column('second_name',String(255),nullable=True)
-    email:Mapped[String] = mapped_column('email',String(255),unique=True,nullable=True)
-    status:Mapped[SmallInteger] = mapped_column('status',SmallInteger,nullable=True,default=1,comment="1=Active,0=Inactive")
-    created_at:Mapped[DateTime] = mapped_column('created_at',DateTime, nullable=True, server_default=func.now())
-    updated_at:Mapped[DateTime] = mapped_column('updated_at',DateTime,nullable=True)
-    
+    with context.begin_transaction():
+        context.run_migrations()
+
+
+def run_migrations_online() -> None:
+    """Run migrations in 'online' mode.
+
+    In this scenario we need to create an Engine
+    and associate a connection with the context.
+
+    """
+    def include_object(object, name, type_, reflected, compare_to):
+        if type_ == "table" and object.schema == SCHEMA_HR:
+            return True
+        return False
+
+    connectable = engine_from_config(
+        config.get_section(config.config_ini_section, {}),
+        prefix="sqlalchemy.",
+        poolclass=pool.NullPool,
+    )
+
+    with connectable.connect() as connection:
+        schema_name = SCHEMA_HR
+        context.configure(
+            connection=connection,
+            target_metadata=target_metadata,
+            version_table_schema=schema_name,
+            include_object=include_object,
+            include_schemas=True
+        )
+
+        with context.begin_transaction():
+            context.execute(f"SET search_path TO {schema_name}")
+            context.run_migrations()
+
+
+if context.is_offline_mode():
+    run_migrations_offline()
+else:
+    run_migrations_online()
+
+```
+
+9. change in alembic/sales/.env
+
+```
+from logging.config import fileConfig
+
+from sqlalchemy import engine_from_config
+from sqlalchemy import pool
+
+from alembic import context
+from database.dbconnection import Base # by atul
+
+# this is the Alembic Config object, which provides
+# access to the values within the .ini file in use.
+config = context.config
+
+# Interpret the config file for Python logging.
+# This line sets up loggers basically.
+if config.config_file_name is not None:
+    fileConfig(config.config_file_name)
+
+# add your model's MetaData object here
+# for 'autogenerate' support
+# from myapp import mymodel
+# target_metadata = mymodel.Base.metadata
+from database.model.sales import * # by atul
+target_metadata = Base.metadata
+from database.dbconfig import SCHEMA_SALES
+
+# other values from the config, defined by the needs of env.py,
+# can be acquired:
+# my_important_option = config.get_main_option("my_important_option")
+# ... etc.
+
+
+def run_migrations_offline() -> None:
+    """Run migrations in 'offline' mode.
+
+    This configures the context with just a URL
+    and not an Engine, though an Engine is acceptable
+    here as well.  By skipping the Engine creation
+    we don't even need a DBAPI to be available.
+
+    Calls to context.execute() here emit the given string to the
+    script output.
+
+    """
+    schema_name = SCHEMA_SALES
+    url = config.get_main_option("sqlalchemy.url")
+    context.configure(
+        url=url,
+        target_metadata=target_metadata,
+        literal_binds=True,
+        dialect_opts={"paramstyle": "named"},
+        version_table_schema=schema_name
+    )
+
+    with context.begin_transaction():
+        context.run_migrations()
+
+
+def run_migrations_online() -> None:
+    """Run migrations in 'online' mode.
+
+    In this scenario we need to create an Engine
+    and associate a connection with the context.
+
+    """
+    def include_object(object, name, type_, reflected, compare_to):
+        if type_ == "table" and object.schema == SCHEMA_SALES:
+            return True
+        return False
+
+    connectable = engine_from_config(
+        config.get_section(config.config_ini_section, {}),
+        prefix="sqlalchemy.",
+        poolclass=pool.NullPool,
+    )
+
+    with connectable.connect() as connection:
+        schema_name = SCHEMA_SALES
+        context.configure(
+            connection=connection,
+            target_metadata=target_metadata,
+            version_table_schema=schema_name,
+            include_object=include_object,
+            include_schemas=True
+        )
+
+        with context.begin_transaction():
+            context.execute(f"SET search_path TO {schema_name}")
+            context.run_migrations()
+
+
+if context.is_offline_mode():
+    run_migrations_offline()
+else:
+    run_migrations_online()
+
+
+```
+
+10. create migration file by alembic for schema like hr
+```
+(env) atul@atul-Lenovo-G570:~/fasterp$ alembic -c alembic/hr/alembic.ini revision --autogenerate -m "Initial user migration"
+
+``` 
+11. migrate the generated migration file for schema like hr
+```
+(env) atul@atul-Lenovo-G570:~/fasterp$ alembic -c alembic/hr/alembic.ini upgrade head
+
+```
+
+12. downgrade migrated migration for a schema like hr
+```
+(env) atul@atul-Lenovo-G570:~/fasterp$ alembic -c alembic/hr/alembic.ini downgrade -1
+
 ```
