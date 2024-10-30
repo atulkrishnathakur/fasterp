@@ -2,7 +2,6 @@
 ## how to clone project from github?
 ```
 atul@atul-Lenovo-G570:~$ git clone https://github.com/atulkrishnathakur/fasterp.git
-
 ```
 
 ## How to generate requirements.txt in python?
@@ -20,14 +19,12 @@ atul@atul-Lenovo-G570:~$ git clone https://github.com/atulkrishnathakur/fasterp.
 
 # you can see version is same.
 # It means you can use pip3 or pip both command in virtual environment
-
 ```
 
 ## How to install fastapi using pip?
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip install "fastapi[standard]"
-
 ```
 
 ## How to run the uvicorn server?
@@ -39,35 +36,30 @@ The command uvicorn main:app refers to:
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ uvicorn main:app --reload
-
 ```
 
 
 ## How to install sqlalchemy ORM in fastapi?
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip3 install sqlalchemy
-
 ```
 
 ## how to install psycopg2-binary?
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip3 install psycopg2-binary
-
 ```
 
 ## How to install alembic to create migrations in fastapi?
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip3 install alembic
-
 ```
 
 Below command will create an alembic directory with necessary configuration files.
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic init alembic
-
 ```
 
 ## How to configure alembic.ini file?
@@ -76,7 +68,6 @@ You can see alembic.ini file outside of alembic directory. The alembic.ini file 
 
 ```
 sqlalchemy.url = sqlalchemy.url = postgresql://postgres:123456789@localhost:5432/fasterp_db
-
 ```
 
 ## How to create database connection with sqlalchemy ORM?
@@ -97,7 +88,6 @@ engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
-
 ```
 
 ## create the database/models/__init__.py file
@@ -107,14 +97,9 @@ Base = declarative_base()
 
 ```
 from .country import Country
-
 ```
-
-
 ## How to configure env.py of alembic?
 Open the alembic/env.py and add below line of code
-
-
 ```
 *******************
 
@@ -138,7 +123,6 @@ Reference url https://fastapi.blog/blog/posts/2023-07-20-fastapi-sqlalchemy-migr
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic revision --autogenerate -m "Initial Migration"
-
 ```
 
 ## create contries table in database
@@ -157,7 +141,6 @@ class Country(Base):
     status = Column('status',Integer,default=1,nullable=True)
     created_at = Column('created_at',DateTime, default=datetime.utcnow, nullable=True)
     updated_at = Column('updated_at',DateTime, default=datetime.utcnow, onupdate=datetime.utcnow,nullable=True)
-    
 ```
 
 
@@ -167,7 +150,6 @@ reference of help: https://python-code.dev/articles/270017224
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic downgrade -1
-
 ``` 
 
 ## rollback(downgrade) specific migration of alembic
@@ -176,7 +158,6 @@ reference of help: https://python-code.dev/articles/270017224
 1. (method-1): get the latest revision ID. command: alembic current
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic current
-
 ```
 
 2.(method-2): You can also get the revision ID from alembic migration file. Go to alembic/versions directory and open the any one migration file. For example 1eaa2206f60f_add_nullable_in_states_table.py here 1eaa2206f60f is the revision ID.
@@ -189,7 +170,6 @@ Note: down_revision: Union[str, None] = '4b268ddeef0d' is the just previous migr
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic downgrade 1eaa2206f60f
-
 ```
 ## rollback(downgrade) the all migrated files of alembic
 Reference: https://alembic.sqlalchemy.org/en/latest/tutorial.html#downgrading
