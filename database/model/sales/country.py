@@ -3,13 +3,13 @@ BigInteger,SmallInteger,func,UniqueConstraint)
 from sqlalchemy.orm import Mapped, declarative_base, mapped_column
 from sqlalchemy.orm.base import Mapped
 from database.dbconnection import Base
-from database.dbconfig import SCHEMA_HR
+from database.dbconfig import SCHEMA_SALES
 
 class Country(Base):
     __tablename__ = 'countries'
     __table_args__ = (
         PrimaryKeyConstraint('id', name='countries_pkey'),
-        {'schema': SCHEMA_HR} # schema is the postgresql schema
+        {'schema': SCHEMA_SALES} # schema is the postgresql schema
     )
 
     id: Mapped[BigInteger] = mapped_column('id',BigInteger,primary_key=True,autoincrement=True,nullable=False)

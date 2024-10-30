@@ -1,14 +1,15 @@
-## clone project
+
+## how to clone project from github?
 ```
 atul@atul-Lenovo-G570:~$ git clone https://github.com/atulkrishnathakur/fasterp.git
 
 ```
 
-## generate requirements.txt
+## How to generate requirements.txt in python?
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip3 freeze > requirements.txt
 ```
-## pip version
+## how to get pip version?
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip3 --version
@@ -22,14 +23,14 @@ atul@atul-Lenovo-G570:~$ git clone https://github.com/atulkrishnathakur/fasterp.
 
 ```
 
-## install fastapi
+## How to install fastapi using pip?
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip install "fastapi[standard]"
 
 ```
 
-## run the server
+## How to run the uvicorn server?
 The command uvicorn main:app refers to:
 
 1. main: the file main.py (the Python "module").
@@ -42,20 +43,20 @@ The command uvicorn main:app refers to:
 ```
 
 
-## install sqlalchemy
+## How to install sqlalchemy ORM in fastapi?
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip3 install sqlalchemy
 
 ```
 
-## install psycopg2-binary
+## how to install psycopg2-binary?
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip3 install psycopg2-binary
 
 ```
 
-## install alembic
+## How to install alembic to create migrations in fastapi?
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip3 install alembic
@@ -69,7 +70,7 @@ Below command will create an alembic directory with necessary configuration file
 
 ```
 
-## alembic.ini file
+## How to configure alembic.ini file?
 
 You can see alembic.ini file outside of alembic directory. The alembic.ini file path is fasterp/alembic.ini. 
 
@@ -78,7 +79,7 @@ sqlalchemy.url = sqlalchemy.url = postgresql://postgres:123456789@localhost:5432
 
 ```
 
-## Database connection
+## How to create database connection with sqlalchemy ORM?
 
 1. create fasterp/database directory
 2. create the fasterp/database/dbconnection.py file
@@ -99,7 +100,7 @@ Base = declarative_base()
 
 ```
 
-## database models __init__.py file
+## create the database/models/__init__.py file
 1. create the database/model directory
 2. create the database/model/__init__.py file
 3. import the created model in database/model/__init__.py file
@@ -110,7 +111,7 @@ from .country import Country
 ```
 
 
-## env.py of alembic
+## How to configure env.py of alembic?
 Open the alembic/env.py and add below line of code
 
 
@@ -125,7 +126,7 @@ target_metadata = Base.metadata
 ***********************
 ```
 
-## Auto Migration
+## Auto Migration in alembic
 
 If you want alembic handles migrations follow this method: In the alembic folder edit env.py and find target_metadata line and edit like the following
 
@@ -133,7 +134,7 @@ import the "from main import Base" in alembic/env.py file and set the "target_me
 
 Reference url https://fastapi.blog/blog/posts/2023-07-20-fastapi-sqlalchemy-migrations-guide
 
-## Generating a Migration
+## Generating a Migration by alembic
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic revision --autogenerate -m "Initial Migration"
@@ -180,7 +181,7 @@ reference of help: https://python-code.dev/articles/270017224
 
 2.(method-2): You can also get the revision ID from alembic migration file. Go to alembic/versions directory and open the any one migration file. For example 1eaa2206f60f_add_nullable_in_states_table.py here 1eaa2206f60f is the revision ID.
 
-2.(method-3) You can also get the revision ID from alembic migration file. Go to alembic/versions directory and open the any one migration file. For example opent the 1eaa2206f60f_add_nullable_in_states_table.py in this file revision: str = '1eaa2206f60f' you will get.
+3.(method-3) You can also get the revision ID from alembic migration file. Go to alembic/versions directory and open the any one migration file. For example opent the 1eaa2206f60f_add_nullable_in_states_table.py in this file revision: str = '1eaa2206f60f' you will get.
 Note: down_revision: Union[str, None] = '4b268ddeef0d' is the just previous migration file revision ID. If you see down_revision: Union[str, None] = None . Here you will see None instead of previous file revision ID. It means this is the first migration file.
 
 
@@ -190,17 +191,15 @@ Note: down_revision: Union[str, None] = '4b268ddeef0d' is the just previous migr
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic downgrade 1eaa2206f60f
 
 ```
-## rollback(downgrade) the all migrated files
+## rollback(downgrade) the all migrated files of alembic
 Reference: https://alembic.sqlalchemy.org/en/latest/tutorial.html#downgrading
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic downgrade base
-
 ```
-## upgrade the all migrations
+## upgrade the all migrations file
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic upgrade head
-
 ```
 
 ## relationship and back_populates
@@ -221,7 +220,6 @@ class Country(Base):
     created_at = Column('created_at',DateTime, default=datetime.utcnow, nullable=True)
     updated_at = Column('updated_at',DateTime, default=datetime.utcnow, onupdate=datetime.utcnow,nullable=True)
     country = relationship('Country', back_populates='state')
-
 ```
 
 2. state.py file module
@@ -248,21 +246,19 @@ class State(Base):
 4. state = relationship('Country', back_populates='country') of state.py file state variable used in back_populates='state' in country.py file.
 
 
-## How see sql query before migration
+## How see sql query before migration?
 reference: https://alembic.sqlalchemy.org/en/latest/offline.html
 
 1. method-1: run the command to show sql in console. command: alembic upgrade head --sql
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic upgrade head --sql
-
 ```
 
 2. method-2: run the command to write sql queries in a file before migration. command: alembic upgrade head --sql > state.sql
 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic upgrade head --sql > state.sql
-
 ```
 
 ## How to see hostory of all migrated migrations
@@ -272,7 +268,6 @@ Reference: https://alembic.sqlalchemy.org/en/latest/tutorial.html
 1. run the command to see history of all migrated files
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic history --verbose
-
 ```
 
 
@@ -280,13 +275,11 @@ Reference: https://alembic.sqlalchemy.org/en/latest/tutorial.html
 1. install the sqlacodegen-v2. reference: https://pypi.org/project/sqlacodegen-v2/
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip3 install sqlacodegen_v2[citext]
-
 ```
 
 2. create a model in models.py for full database
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp/database/model$ sqlacodegen_v2 postgresql://postgres:123456789@localhost:5432/fasterp_db > models.py
-
 ```
 
 3. create a model file for every table
@@ -296,7 +289,6 @@ Reference: https://alembic.sqlalchemy.org/en/latest/tutorial.html
 # Or
 
 (env) atul@atul-Lenovo-G570:~/fasterp/database/model$ sqlacodegen_v2 postgresql://postgres:123456789@localhost:5432/fasterp_db --tables countries states > location.py
-
 ```
 
 Note: currently sqlcodegen does not support python3.12 therefore I used sqlacodegen_v2. If sqlacodegen support your python version then use it.
@@ -304,7 +296,6 @@ Note: currently sqlcodegen does not support python3.12 therefore I used sqlacode
 4. create the migration 
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic revision --autogenerate -m "initial migration"
-
 ```
 
 5. Comment the all code of upgrade() and downgrade() funciton and use the pass keyword
@@ -325,7 +316,6 @@ def downgrade() -> None:
     # )
     # ### end Alembic commands ###
     pass
-
 ```
 
 5. migrate the this file
@@ -333,7 +323,6 @@ def downgrade() -> None:
 Note: do not use --autogenerate in command to create migration
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic revision -m "initial add new column"
-
 ```
 Change migration file to add column like below:
 ```
@@ -365,7 +354,6 @@ def downgrade() -> None:
 
 ```
 7. update new column in the model 
-
 ```
 from sqlalchemy import BigInteger, Column, PrimaryKeyConstraint, Text
 from sqlalchemy.orm import Mapped, declarative_base, mapped_column
@@ -383,14 +371,11 @@ class Country(Base):
     id = mapped_column(BigInteger)
     name = mapped_column(Text)
     code = mapped_column(Text, nullable=True)  # Add the new column here
-
 ```
 
 8. create new migration to creatte new table 
-
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic revision -m "create account table"
-
 ```
 
 change the migration file to crate table
@@ -438,11 +423,9 @@ Reference: https://docs.sqlalchemy.org/en/20/orm/cascades.html
 
 
 ## timezone setting
-
 1. install the pytz for timezone
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip3 install pytz
-
 ```
 
 ## Table Configuration with Declarative for mapped_column
@@ -455,7 +438,6 @@ Reference: https://docs.sqlalchemy.org/en/20/orm/declarative_tables.html
 ```
 alembic -c alembic/hr/alembic.ini init alembic/hr
 alembic -c alembic/sales/alembic.ini init alembic/sales
-
 ```
 
 4. Configure alembic/hr/alembic.ini and alembic/sales/alembic.ini. Set the same database for both. If database name is different then you write diffent database name.
@@ -463,13 +445,11 @@ alembic -c alembic/sales/alembic.ini init alembic/sales
 ```
 script_location = alembic/hr
 sqlalchemy.url = postgresql://postgres:123456789@localhost:5432/fasterp_db
-
 ```
 
 ```
 script_location = alembic/sales
 sqlalchemy.url = postgresql://postgres:123456789@localhost:5432/fasterp_db
-
 ```
 
 5. create include_object() function in alembic/hr/env.py and sales/env.py file
@@ -671,23 +651,18 @@ if context.is_offline_mode():
     run_migrations_offline()
 else:
     run_migrations_online()
-
-
 ```
 
 10. create migration file by alembic for schema like hr
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic -c alembic/hr/alembic.ini revision --autogenerate -m "Initial user migration"
-
 ``` 
 11. migrate the generated migration file for schema like hr
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic -c alembic/hr/alembic.ini upgrade head
-
 ```
 
 12. downgrade migrated migration for a schema like hr
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ alembic -c alembic/hr/alembic.ini downgrade -1
-
 ```
