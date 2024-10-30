@@ -1,15 +1,14 @@
-
+## FasAPI Tutorials
+Step by step learn fastAPI tutorial. 
 ## how to clone project from github?
 ```
 atul@atul-Lenovo-G570:~$ git clone https://github.com/atulkrishnathakur/fasterp.git
 ```
-
 ## How to generate requirements.txt in python?
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip3 freeze > requirements.txt
 ```
 ## how to get pip version?
-
 ```
 (env) atul@atul-Lenovo-G570:~/fasterp$ pip3 --version
 
